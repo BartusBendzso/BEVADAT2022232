@@ -75,15 +75,22 @@ def encode_Y(arr: np.ndarray, classNumber: int) -> np.ndarray:
 # decode_Y()
 
 # %%
-arr = np.array([1, 2, 3, 4, 5, 6, 7])
-print(arr[4:5])
-
+def decode_y(array2d : np.ndarray) -> np.ndarray:
+    arrOut = np.where(array2d == 1)
+    arrOut = np.array(arrOut).reshape(-1)[np.array(arrOut).shape[1]:]
+    return arrOut
 
 # %%
 # Készíts egy olyan függvényt, ami képes kiértékelni egy neurális háló eredményét! Bemenetként egy listát és egy array-t és adja vissza azt az elemet, aminek a legnagyobb a valószínüsége(értéke) a listából.
 # Be: ['alma', 'körte', 'szilva'], [0.2, 0.2, 0.6]. # Az ['alma', 'körte', 'szilva'] egy lista!
 # Ki: 'szilva'
 # eval_classification()
+
+# %%
+def eval_classification(l: list, arr: np.ndarray) -> str:
+    return l[np.argmax(arr)]
+
+print(eval_classification(['alma', 'körte', 'szilva'], np.array([0.2, 0.2, 0.6])))
 
 # %%
 # Készíts egy olyan függvényt, ahol az 1D array-ben a páratlan számokat -1-re cseréli
@@ -109,10 +116,18 @@ print(arr[4:5])
 # Ha több dimenziós a tömb, akkor az egész tömb elemeinek szorzatával térjen vissza
 
 # %%
+def array_multi(arr: np.ndarray) -> int:
+    return np.prod(arr)
+
+# %%
 # Készíts egy olyan függvényt, ami egy 2D array értékeit összeszorozza és egy olyan array-el tér vissza, aminek az elemei a soroknak a szorzata
 # Be: [[1, 2], [3, 4]]
 # Ki: [2, 12]
 # array_multi_2d()
+
+# %%
+def array_multi_2d(arr: np.ndarray) -> np.ndarray:
+    return np.prod(arr, axis=1)
 
 # %%
 # Készíts egy olyan függvényt, amit egy meglévő numpy array-hez készít egy bordert nullásokkal. Bementként egy array-t várjon és kimenetként egy array jelenjen meg aminek van border-je
