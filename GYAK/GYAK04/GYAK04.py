@@ -26,8 +26,6 @@ stats = {"country": ["Brazil", "Russia", "India", "China", "South Africa"],
 
 def dict_to_dataframe(dictParam: dict) -> pd.DataFrame:
     return pd.DataFrame(dictParam)
-
-df = dict_to_dataframe(stats)
     
 
 # %%
