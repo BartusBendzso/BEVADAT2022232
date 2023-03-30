@@ -11,7 +11,7 @@ class KNNClassifier:
         self.k = k
         self.test_split_ratio = test_split_ratio
     
-    def load_csv(self, csv_path:str)-> Tuple[np.ndarray,np.ndarray]:
+    def load_csv(csv_path:str)-> Tuple[np.ndarray,np.ndarray]:
         np.random.seed(42)
         dataset = np.genfromtxt(csv_path, delimiter=',')
         np.random.shuffle(dataset)
@@ -45,6 +45,6 @@ class KNNClassifier:
         true_positive = (self.y_test == self.y_preds).sum()
         return true_positive / len(self.y_test) * 100
 
-    def confusion_matrix(self):
-        conf_matrix = confusion_matrix(self.y_test, self.y_preds)
-        sns.heatmap(conf_matrix,annot=True)
+    def confusion_matrix(self) -> np.ndarray:
+        return confusion_matrix(self.y_test, self.y_preds)
+        
