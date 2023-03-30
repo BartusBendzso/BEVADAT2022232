@@ -7,10 +7,15 @@ csv_path="iris.csv"
 
 class KNNClassifier:
     
+    @staticmethod
+    def k_neighbors(self):
+        return self.k
+
     def __init__(self, k:int, test_split_ratio :float) -> None:
         self.k = k
         self.test_split_ratio = test_split_ratio
     
+    @staticmethod 
     def load_csv(csv_path:str)-> Tuple[np.ndarray,np.ndarray]:
         np.random.seed(42)
         dataset = np.genfromtxt(csv_path, delimiter=',')
