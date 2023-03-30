@@ -7,7 +7,7 @@ csv_path="iris.csv"
 
 class KNNClassifier:
     
-    @staticmethod
+    @property
     def k_neighbors(self):
         return self.k
 
