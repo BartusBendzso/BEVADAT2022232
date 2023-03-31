@@ -1,0 +1,29 @@
+A K-Nearest Neighbor (KNN) osztályozó egy felügyelt gépi tanulási algoritmus, amelyet osztályozási feladatokhoz használnak. A KNN osztályozás munkafolyamata több lépésből áll. Először is felosztottuk adatkészletünket képzési és tesztelési készletekre, hogy értékeljük modellünk teljesítményét.
+
+Ezután meghatározzuk a K értékét, 
+amely a legközelebbi szomszédok száma, 
+amelyeket figyelembe veszünk egy új adatpont osztályozásakor. 
+Ezután kiszámítjuk az új adatpont és az 
+összes képzési adatpont közötti távolságot 
+egy távolságfüggvénnyel, például az euklideszi távolságfüggvénnyel. 
+Az euklideszi távolságfüggvény egy többdimenziós tér két pontja közötti egyenes távolságot méri.
+
+Miután kiszámítottuk az új adatpont és a betanítási adatpontok közötti távolságokat, 
+kiválasztjuk a K legközelebbi szomszédot. 
+Ezután hozzárendeljük az új adatpontot ahhoz az osztályhoz, 
+amely a leggyakrabban jelenik meg a K legközelebbi szomszédai között.
+
+Modellünk pontosságának értékeléséhez teljesítménymutatót használunk, 
+például a pontossági pontszámot. 
+A pontossági pontszám azt méri, 
+hogy a modell a tesztkészleten hány helyes előrejelzést adott.
+
+Összefoglalva, 
+a KNN osztályozó munkafolyamata magában foglalja az adatok felosztását, 
+K értékének meghatározását, 
+az új adatpont és a betanítási adatpontok 
+közötti távolságok távolságfüggvény segítségével történő kiszámítását, 
+a K legközelebbi szomszédok kiválasztását, 
+és az új adatpont hozzárendelését a most gyakori óra. 
+Végül értékeljük a modell teljesítményét olyan teljesítménymutatók segítségével,
+mint például a pontosság.
