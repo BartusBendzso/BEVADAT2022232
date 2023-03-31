@@ -53,4 +53,14 @@ class KNNClassifier:
 
     def confusion_matrix(self) -> pd.DataFrame:
         return pd.crosstab(self.y_test, self.y_preds)
-        
+
+    def best_k(self) -> Tuple[int, float]:
+        accuracies = []
+        for k in range(1,21):
+            self.k = k
+            self.predict()
+            accuracy = self.accuracy()
+            accuracies.append((k,accuracy))
+        best_k = max(accuracies, key=lambda x:x[1])
+        return (best_k[0], round(best_k[1], 2))
+            

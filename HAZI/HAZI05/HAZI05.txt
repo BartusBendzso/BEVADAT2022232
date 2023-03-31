@@ -1,29 +1,39 @@
-A K-Nearest Neighbor (KNN) osztályozó egy felügyelt gépi tanulási algoritmus, amelyet osztályozási feladatokhoz használnak. A KNN osztályozás munkafolyamata több lépésből áll. Először is felosztottuk adatkészletünket képzési és tesztelési készletekre, hogy értékeljük modellünk teljesítményét.
+Adatbetöltés: 
+Az load_csv metódus a megadott CSV fájlból betölti az adatokat. 
+A betöltött adatokat megkeveri
+és az x változóban tárolja a bemeneti jellemzőket,
+az y változóban pedig a kimeneti címkéket.
 
-Ezután meghatározzuk a K értékét, 
-amely a legközelebbi szomszédok száma, 
-amelyeket figyelembe veszünk egy új adatpont osztályozásakor. 
-Ezután kiszámítjuk az új adatpont és az 
-összes képzési adatpont közötti távolságot 
-egy távolságfüggvénnyel, például az euklideszi távolságfüggvénnyel. 
-Az euklideszi távolságfüggvény egy többdimenziós tér két pontja közötti egyenes távolságot méri.
+Adatok felosztása tanító és tesztadatokra: 
+A train_test_split metódus szétválasztja az adatokat tanító és tesztadatokra. 
+A test_split_ratio paraméter határozza meg, hogy hány százalékát használjuk tesztadatoknak.
 
-Miután kiszámítottuk az új adatpont és a betanítási adatpontok közötti távolságokat, 
-kiválasztjuk a K legközelebbi szomszédot. 
-Ezután hozzárendeljük az új adatpontot ahhoz az osztályhoz, 
-amely a leggyakrabban jelenik meg a K legközelebbi szomszédai között.
+Távolság számítása: 
+Az euclidean metódus kiszámítja az összes bemeneti adatpont és tesztadatpont közötti távolságot
+az euklideszi távolság formulája alapján.
 
-Modellünk pontosságának értékeléséhez teljesítménymutatót használunk, 
-például a pontossági pontszámot. 
-A pontossági pontszám azt méri, 
-hogy a modell a tesztkészleten hány helyes előrejelzést adott.
+K-legközelebbi szomszéd kiválasztása:
+Az összes távolság kiszámítása után
+a legkisebb távolságú k darab pontot kiválasztjuk,
+és az ezekhez tartozó kimeneti címkéket használjuk
+az új adatpont címkéjének meghatározására.
 
-Összefoglalva, 
-a KNN osztályozó munkafolyamata magában foglalja az adatok felosztását, 
-K értékének meghatározását, 
-az új adatpont és a betanítási adatpontok 
-közötti távolságok távolságfüggvény segítségével történő kiszámítását, 
-a K legközelebbi szomszédok kiválasztását, 
-és az új adatpont hozzárendelését a most gyakori óra. 
-Végül értékeljük a modell teljesítményét olyan teljesítménymutatók segítségével,
-mint például a pontosság.
+Predikció: 
+Az új adatpont címkéjének meghatározása a predict metódusban történik meg.
+A metódus végigmegy az összes tesztadaton,
+kiszámítja az összes bemeneti adatpont és tesztadatpont közötti távolságot,
+majd kiválasztja a k legközelebbi szomszédot.
+Végül, a leggyakoribb kimeneti címkét használja a tesztadat címkéjének becslésére.
+
+Pontosság:
+Az accuracy metódus kiszámítja a modell pontosságát.
+Az összes tesztadatra előrejelzett kimeneteket
+összehasonlítjuk a valódi kimenetekkel,
+és meghatározzuk az előrejelzések pontoságát százalékban.
+
+Konfúziós mátrix:
+A confusion_matrix metódus kiszámítja a konfúziós mátrixot,
+amely megmutatja,
+hogy a modell melyik osztályokat jósolta meg helyesen és helytelenül.
+A sorok a valódi kimeneti címkéket jelölik,
+míg az oszlopok az előrejelzett kimeneti címkéket.
