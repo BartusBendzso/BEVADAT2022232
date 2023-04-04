@@ -34,18 +34,21 @@ class KNNClassifier:
         
     
     def euclidean(self, element_of_x: pd.Series) -> pd.Series:
-        return np.sqrt(np.sum((self.x_train - element_of_x)**2, axis=1))
+        return pd.Series(
+            data=np.sqrt(((self.x_train - element_of_x) ** 2).sum(axis=1)),
+            index=self.x_train.index
+        )
     
     def predict(self) -> pd.Series:
         labels_pred = []
-        for x_test_element in self.x_test.iterrows():
+        for _, x_test_element in self.x_test.iterrows():
             distances = self.euclidean(x_test_element)
             distances = pd.concat([distances, self.y_train], axis=1)
             distances = distances.sort_values(by=0).values
 
             label_pred = mode(distances[:self.k,1], axis=0).mode[0]
             labels_pred.append(label_pred)
-        self.y_preds = pd.Series(labels_pred, dtype=np.int64)
+        self.y_preds = pd.Series(labels_pred, dtype=np.int64, index=self.y_test.index)
     
     def accuracy(self) -> float:
         true_positive = (self.y_test == self.y_preds).sum()
@@ -64,4 +67,6 @@ class KNNClassifier:
             accuracies.append((k,accuracy))
         best_k = max(accuracies, key=lambda x:x[1])
         return (best_k[0], round(best_k[1], 2))
+    
+    
             
