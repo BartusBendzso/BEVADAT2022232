@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 from typing import Tuple
 from scipy.stats import mode
-from sklearn.metrics import confusion_matrix
+from sklearn.metrics import confusion_matrix as sklearn_cm
 import seaborn as sns
 csv_path="diabetes.csv"
 
@@ -24,7 +24,7 @@ class KNNClassifier:
         return x,y
     
     
-    def train_test_slpit(self, features: pd.DataFrame,
+    def train_test_split(self, features: pd.DataFrame,
                         labels: pd.Series) -> Tuple[pd.DataFrame, pd.DataFrame, pd.Series, pd.Series]:
         test_size = int(len(features) * self.test_split_ratio)
         train_size = len(features) - test_size
@@ -33,8 +33,8 @@ class KNNClassifier:
         self.x_test,self.y_test = features.iloc[train_size:,:],labels.iloc[train_size:]
         
     
-    def euclidean(self, element_of_x:np.ndarray) -> np.ndarray:
-        return np.sqrt(np.sum((self.x_train - element_of_x)**2,axis=1))
+    def euclidean(self, element_of_x: pd.Series) -> pd.Series:
+        return np.sqrt(np.sum((self.x_train - element_of_x)**2, axis=1))
     
     def predict(self) -> pd.Series:
         labels_pred = []
@@ -52,7 +52,8 @@ class KNNClassifier:
         return true_positive / len(self.y_test) * 100
 
     def confusion_matrix(self) -> pd.DataFrame:
-        return pd.crosstab(self.y_test, self.y_preds)
+        return pd.DataFrame(sklearn_cm(self.y_test, self.y_preds))
+
 
     def best_k(self) -> Tuple[int, float]:
         accuracies = []

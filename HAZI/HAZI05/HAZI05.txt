@@ -37,3 +37,11 @@ amely megmutatja,
 hogy a modell melyik osztályokat jósolta meg helyesen és helytelenül.
 A sorok a valódi kimeneti címkéket jelölik,
 míg az oszlopok az előrejelzett kimeneti címkéket.
+
+best_k:
+1-től 20-ig értéken végiglépteti k-t egy forciklussal, 
+és a korábban megírt accuracy és predict függvény alapján
+létrehozza tuple-ben a (k,pontosság) párosokat, 
+melyet aztán felvesz egy előre létrehozott accuracies listába.
+Ezután a max függvényel kiválasztja a legjobb accuracy értékkel rendelkező k-t,
+amit visszaad egy tuple-ben az előírt kerekítéssel.
