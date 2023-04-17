@@ -43,18 +43,18 @@ class NJCleaner():
                                    axis=1)
         return dropColDf
     
-    def save_first_60k(self, save_path: str):
+    def save_first_60k(self, path: str):
         save_df = self.data.head(60000)
-        return save_df.to_csv(path_or_buf=save_path, index=False)
+        return save_df.to_csv(path_or_buf=path, index=False)
     
-    def prep_df(self, save_path: str = 'data/NJ.csv'):
+    def prep_df(self, path: str = 'data/NJ.csv'):
         self.data = (self.order_by_scheduled_time(),
                     self.drop_columns_and_nan(),
                     self.convert_date_to_day(),
                     self.convert_scheduled_time_to_part_of_the_day(),
                     self.convert_delay(),
                     self.drop_unnecessary_columns(),
-                    self.save_first_60k(save_path))
+                    self.save_first_60k(path))
 
     
 
