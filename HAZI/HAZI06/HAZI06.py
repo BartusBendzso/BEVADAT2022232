@@ -192,8 +192,20 @@ data = pd.read_csv('NJ.csv')
 X = data.iloc[:, :-1].values
 Y = data.iloc[:, -1].values.reshape(-1,1)
 X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2, random_state=41)
+param_grid = {'max_depth': [2, 3, 4, 5]}
 dt = DecisionTreeClassifier()
 dt.fit(X_train, Y_train)
-y_pred = dt.predict(X_test)
-accuracy = accuracy_score(Y_test, y_pred)
+Y_pred = dt.predict(X_test)
+accuracy = accuracy_score(Y_test, Y_pred)
 print("Pontosság:", accuracy)
+
+grid_search = GridSearchCV(dt, param_grid=param_grid, cv=5)
+grid_search.fit(X, Y)
+
+""" 
+A tanításom néhány mondatban:
+Lemásoltam az órán írtakat.
+Ezután fogtam, és mindezt átírtam a NJ.csv-re.
+Ezután a grid_search-öt próbálgattam, de túl sokra nem mentem vele sajnos, szóval így meglőve áll a program.
+Ami főként (számomra) érthető nehézséget okozott, az az előkészítésben mire rá tudtam keresni a cut függvényre sok időt igényelt.
+"""
